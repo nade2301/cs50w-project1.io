@@ -1,0 +1,86 @@
+{% extends "layout.html" %}
+
+{% block title %}
+    resena
+{% endblock %}
+
+{% block main %}
+<p>Title:  {{lib['title']}}</p>
+            <p>Author: {{lib['author']}}</p>
+            <p> Year: {{lib['year']}}</p>
+            <p> Isbn: {{lib['isbn']}}</p>
+            <img  src="{{image}}"  alt="">
+            <p>review_count:   {{ratingscount}}</p>
+            <p>average_score:  {{averagerating}}</p>
+
+
+            <form action="/resena/{{lib['id']}}" method="post">
+
+                <div class="form-row align-items-center">
+                    <input class="form-control form-control-lg"  name="comentario" type="text" placeholder="comentario" {% if comentario > 0 %}disabled{% else %}required {% endif %}>
+                  <div class="col-auto my-1">
+                    <select class="custom-select mr-sm-2" name="puntuacion" id="inlineFormCustomSelect" {% if comentario > 0 %}disabled{% else %}required {% endif %}>
+                      <option selected>puntuacion</option>
+                      <option value="1">1</option>
+                      <option value="2">2</option>
+                      <option value="3">3</option>
+                      <option value="4">4</option>
+                      <option value="5">5</option>
+                    </select>
+                  </div>
+                  
+                    <button type="submit" class="btn btn-primary " {% if comentario > 0 %}disabled{% else %}required {% endif %}>aceptar</button>
+
+                  </div>
+                </div>
+              </form>
+              {% for reviews in reviews %}
+              <section>
+                <div class="container my-5 py-5">
+                  <div class="row d-flex justify-content-center">
+                    <div class="col-md-12 col-lg-10">
+                      <div class="card text-dark">
+                        <div class="card-body p-4">
+                          <h4 class="mb-0">Comentarios</h4>
+                          <p class="fw-light mb-4 pb-2">Latest Comments section by users</p>
+        
+                          <div class="d-flex flex-start">
+                            <img class="rounded-circle shadow-1-strong me-3"
+                              src="data:image/png;base64,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" alt="avatar" width="60"
+                              height="60" />
+                            <div>
+                              <h6 class="fw-bold mb-1">{{reviews['username']}}</h6>
+                              <div class="d-flex align-items-center mb-3">
+                                <p class="mb-0">
+                                  <div id="current_date"></p>
+                                    <script>
+                                    date = new Date();
+                                    year = date.getFullYear();
+                                    month = date.getMonth() + 1;
+                                    day = date.getDate();
+                                    document.getElementById("current_date").innerHTML = month + "/" + day + "/" + year;
+                                    </script>
+                                  </p>
+
+                                <a href="#!" class="link-muted ml-3"></a>
+                                <p class="ml-3 mb-0">puntuacion es de: {{reviews['puntuacion']}}</p>
+                              </div>
+                              <p class="mb-0">
+                                comentario: {{reviews['comentario']}}
+                              </p>
+                            </div>
+                          </div>
+                        </div>
+        
+        
+        
+        
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </section>
+              {% endfor %}
+{% endblock %}
+
+

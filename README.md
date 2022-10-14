@@ -1,0 +1,5 @@
+# Project 1
+
+Web Programming with Python and JavaScript
+Este proyecto de web50  antes que todo tiene que registrar un nuevo usuario al registrarlo va a la base de datos donde ya queda guardado a ese usuario que se ingreso y si salimos y ingresamos de nuevo  y si se ingresa correctamente a como registro el podra ingresar a la pagina de libros  despues se hace la busqueda como sea que busques tanto de autor,libro y año  todos los libros que se ingreso en la base de datos el dara y si no hay exactamente el libro que busca se dara una aproximacion deacuerdo a la busqueda que ingresaste despues de eso da una appy de google y lo imprime cuando le das click en el libro despues aparece una caja de comentario donde puedes dar una referencia de lo que te parecio el libro  una puntuacion del 1 al 5 ya cuando se hizo el comentario no se podra hacer de nuevo
+solo que sea en otro libro 
