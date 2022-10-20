@@ -12,14 +12,19 @@
             <img  src="{{image}}"  alt="">
             <p>review_count:   {{ratingscount}}</p>
             <p>average_score:  {{averagerating}}</p>
-
+            {% if comentario > 0 %} 
+            <div class="alert alert-primary" role="alert">
+              este usuario ya comento una vez, no se puede comentar mas de una vez!!!
+            </div>
+            {% endif %}
+            
 
             <form action="/resena/{{lib['id']}}" method="post">
 
                 <div class="form-row align-items-center">
                     <input class="form-control form-control-lg"  name="comentario" type="text" placeholder="comentario" {% if comentario > 0 %}disabled{% else %}required {% endif %}>
                   <div class="col-auto my-1">
-                    <select class="custom-select mr-sm-2" name="puntuacion" id="inlineFormCustomSelect" {% if comentario > 0 %}disabled{% else %}required {% endif %}>
+                    <select class="custom-select mr-sm-2 form-select" name="puntuacion" id="inlineFormCustomSelect" {% if comentario > 0 %}disabled{% else %}required {% endif %}>
                       <option selected>puntuacion</option>
                       <option value="1">1</option>
                       <option value="2">2</option>
