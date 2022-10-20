@@ -107,7 +107,7 @@ def resena(id):
     else:
         averagerating=0
         ratingscount=0
-   
+    ##user_id=['user_id']
     comentario=db.execute("SELECT count (*) AS conteo FROM rev WHERE user_id=:user_id AND book_id=:id",{"user_id":session['user_id'],"id":id}).fetchone()["conteo"]
     print("bf",comentario)
     
@@ -198,9 +198,12 @@ def register():
             hash= generate_password_hash(contrasena) 
             nuevo = db.execute("INSERT INTO users (username,hash) VALUES (:user, :hash) returning id", {"user": usuario, "hash": hash}).fetchone()
             db.commit()
+            id_user=db.execute("SELECT id FROM users WHERE username=:username", {"username":usuario,"hash":hash}).fetchone()["id"]
         elif rows:
             return apology("El usuario ya existe.")
-        session["user_id"] = nuevo
+        session["user_id"] = id_user
+        print("ID ANTERIOR: ",nuevo)
+        print("ID  NUEVO", id_user)
         return redirect("/")
 
     
